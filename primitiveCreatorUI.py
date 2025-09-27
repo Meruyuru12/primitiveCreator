@@ -7,6 +7,9 @@ except:
 
 import maya.OpenMayaUI as omui
 import os
+import importlib
+from . import primitiveCreatorUtil as primutil
+importlib.reload(primutil)
 
 # ICON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..","icons"))
 ICON_PATH = os.path.join(os.path.dirname(__file__),'icons').replace("\\","/")
@@ -45,6 +48,8 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 
 		self.create_button = QtWidgets.QPushButton("Create")
 		self.cancel_button = QtWidgets.QPushButton("Cancel")
+		self.create_button.clicked.connect(self.primCreator)
+		self.cancel_button.clicked.connect(self.close)
 		
 
 		self.button_layout.addStretch()
@@ -60,6 +65,15 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 			item.setIcon(QtGui.QIcon(os.path.join(ICON_PATH, f"{prim}.png")))
 			self.primitive_listWidget.addItem(item)
 
+	def primCreator(self):
+		resultShapes = self.primitive_listWidget.currentItem().text()
+		resultName = self.name_lineEdit.text()
+		print(resultShapes)
+		primutil.doCreateItem(resultShapes, resultName)
+
+
+
+
 
 
 def run():
@@ -72,4 +86,5 @@ def run():
 	ptr = wrapInstance(int(omui.MQtUtil.mainWindow()),QtWidgets.QWidget)
 	ui = PrimitiveCreatorDialog(parent = ptr)
 	ui.show()
+
 
