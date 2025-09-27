@@ -30,6 +30,7 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 		self.primitive_listWidget.setViewMode(QtWidgets.QListView.IconMode)
 		self.primitive_listWidget.setMovement(QtWidgets.QListView.Static)
 		self.primitive_listWidget.setResizeMode(QtWidgets.QListView.Adjust)
+		self.primitive_listWidget.setStyleSheet('background-color : #6A5D5A;')
 
 		
 
@@ -40,6 +41,7 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 
 		self.name_label = QtWidgets.QLabel("Name :")
 		self.name_lineEdit = QtWidgets.QLineEdit()
+		self.name_lineEdit.setStyleSheet('background-color : #FCEBEB;' 'color : blue; ')
 		self.name_layout.addWidget(self.name_label)
 		self.name_layout.addWidget(self.name_lineEdit)
 
@@ -50,6 +52,14 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 		self.cancel_button = QtWidgets.QPushButton("Cancel")
 		self.create_button.clicked.connect(self.primCreator)
 		self.cancel_button.clicked.connect(self.close)
+
+		self.create_button.setStyleSheet(
+			'''background-color : #9B7A5F;'''
+			)
+		self.cancel_button.setStyleSheet(
+			'''background-color : #EA8F8F;'''
+
+			)
 		
 
 		self.button_layout.addStretch()
